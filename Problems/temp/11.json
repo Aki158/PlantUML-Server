@@ -1,6 +1,0 @@
-{
-    "id": 11,
-    "title": "Abstract と Static",
-    "theme": "クラス図",
-    "uml": "@startuml\nclass Dummy {\n    {static} String id\n    {abstract} void methods()\n}\n@enduml"
-}

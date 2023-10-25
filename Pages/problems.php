@@ -7,14 +7,10 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
         <title>UML問題集</title>
-        <script src="onload.js"></script>
+        
     <style>
         .table {
-            width: 100%;
             margin-bottom: 1rem;
-        }
-
-        table {
             border-collapse: collapse;
         }
 
@@ -55,30 +51,33 @@
 </head>
 <body>
     <script>
-        var page_index = 1;
+        var clicked_page_index = 1;
 
         window.addEventListener("load", (event) => {
-            request = load_jsonfile(new XMLHttpRequest(),'../Problems/problems.json','json');
+            request = new XMLHttpRequest();
+            request.open('GET', '../Problems/problems.json');
+            request.responseType = 'json';
+            request.send();
             request.onload = function() {
-                window.list = JSON.parse(JSON.stringify(request.response));
+                const problems_hashmap_arr = JSON.parse(JSON.stringify(request.response));
 
-                for (var i = 0; i < Object.keys(list).length; i++) {
+                for (var i = 0; i < Object.keys(problems_hashmap_arr).length; i++) {
                     if(i % 5 == 0){
-                        render_page_button((i / 5) + 1,list,document.getElementById("page_button_group"));
+                        render_page_button((i / 5) + 1,problems_hashmap_arr,document.getElementById("page_button_group"));
                     }
-                    render_table_cell(i,list,document.getElementById("table_body"));
+                    render_table_cell(i,problems_hashmap_arr,document.getElementById("table_body"));
                 }
             }
         });
 
-        function render_page_button(p_index,list,page_button_group){
+        function render_page_button(page_index,problems_hashmap_arr,page_button_group){
             const li = document.createElement("li");
             const p = document.createElement("p");
 
-            p.setAttribute("id", "page"+p_index);
+            p.setAttribute("id", "page"+page_index);
 
-            p.innerHTML = p_index;
-            if(p_index == 1){
+            p.innerHTML = page_index;
+            if(page_index == 1){
                 p.classList.add("page-clicked-link","cursor-pointer");
             }
             else{
@@ -86,16 +85,16 @@
             }
             
             p.addEventListener("click", function() {
-                page_index = p_index;
+                clicked_page_index = page_index;
 
-                for (var i = 0; i < Object.keys(list).length; i++) {
+                for (var i = 0; i < Object.keys(problems_hashmap_arr).length; i++) {
                     set_display_state(i,document.getElementById("table_content"+(i+1)));
                 }
                 
-                for (var i = 1; i < Math.floor(Object.keys(list).length / 5) + 1; i++) {
-                    var page_button = document.getElementById("page"+(i));
+                for (var i = 1; i < Math.floor(Object.keys(problems_hashmap_arr).length / 5) + 1; i++) {
+                    const page_button = document.getElementById("page"+(i));
 
-                    if(i == page_index & page_button.classList.contains("page-link")){
+                    if(i == clicked_page_index & page_button.classList.contains("page-link")){
                             page_button.classList.remove("page-link");
                             page_button.classList.add("page-clicked-link");
                     }
@@ -110,7 +109,7 @@
             page_button_group.append(li);
         }
 
-        function render_table_cell(index,list,table_body){
+        function render_table_cell(index,problems_hashmap_arr,table_body){
             const row = document.createElement("tr");
             const cell_th_id = document.createElement("th");
             const cell_td_title = document.createElement("td");
@@ -122,16 +121,16 @@
             cell_td_title.setAttribute("id", "title"+(index+1));
             cell_td_theme.setAttribute("id", "theme"+(index+1));
 
-            cell_th_id.innerHTML = list[index].id;
-            cell_td_title.innerHTML = list[index].title;
-            cell_td_theme.innerHTML = list[index].theme;
+            cell_th_id.innerHTML = problems_hashmap_arr[index].id;
+            cell_td_title.innerHTML = problems_hashmap_arr[index].title;
+            cell_td_theme.innerHTML = problems_hashmap_arr[index].theme;
 
             row.classList.add("cursor-pointer");
             
             set_display_state(index,row);
 
             row.addEventListener('click', function() {
-                localStorage.setItem('problem_data', JSON.stringify(list[index]));
+                localStorage.setItem('problem_data', JSON.stringify(problems_hashmap_arr[index]));
                 window.location.href = 'problem.php'+'?id='+cell_th_id.innerHTML;
             });
 
@@ -143,7 +142,7 @@
 
         function set_display_state(index,table_row){
             // page_indexの値からtableへの表示/非表示を設定する
-            if((page_index-1) * 5 <= index & index < page_index * 5){
+            if((clicked_page_index-1) * 5 <= index & index < clicked_page_index * 5){
                 table_row.style.display = '';
             }
             else{
@@ -163,12 +162,10 @@
             </thead>
             <tbody id="table_body"></tbody>
         </table>
-        <div class="row">
-            <div class="col d-flex justify-content-center">
-                <nav>
-                    <ul  id="page_button_group" class="pagination"></ul>
-                </nav>
-            </div>
+        <div class="col d-flex justify-content-center">
+            <nav>
+                <ul  id="page_button_group" class="pagination"></ul>
+            </nav>
         </div>
     </div>
 

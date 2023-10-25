@@ -1,6 +1,0 @@
-{
-    "id": 1,
-    "title": "基本的な例",
-    "theme": "シーケンス図",
-    "uml": "@startuml\nAlice -> Bob: Authentication Request\nBob --> Alice: Authentication Response\n\nAlice -> Bob: Another authentication Request\nAlice <-- Bob: Another authentication Response\n@enduml"
-}

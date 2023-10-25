@@ -1,6 +1,0 @@
-{
-    "id": 13,
-    "title": "継承(extends)と実装(implements)",
-    "theme": "クラス図",
-    "uml": "@startuml\nclass ArrayList implements List\nclass ArrayList extends AbstractList\n@enduml"
-}

@@ -1,6 +1,0 @@
-{
-    "id": 15,
-    "title": "条件文",
-    "theme": "アクティブティ図",
-    "uml": "@startuml\nstart\n\nif (Graphviz installed?) then (yes)\n  :process all\\ndiagrams;\nelse (no)\n  :process only\n  __sequence__ and __activity__ diagrams;\nendif\n\nstop\n\n@enduml\n"
-}
