@@ -1,6 +1,0 @@
-{
-    "id": 18,
-    "title": "フォーク(非同期実行)",
-    "theme": "状態図",
-    "uml": "@startuml\nstate fork_state <<fork>>\n[*] --> fork_state\nfork_state --> State2\nfork_state --> State3\n\nstate join_state <<join>>\nState2 --> join_state\nState3 --> join_state\njoin_state --> State4\nState4 --> [*]\n\n@enduml"        
-}

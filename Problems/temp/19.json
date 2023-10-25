@@ -1,6 +1,0 @@
-{
-    "id": 19,
-    "title": "条件",
-    "theme": "状態図",
-    "uml": "@startuml\nstate \"Req(Id)\" as ReqId <<sdlreceive>>\nstate \"Minor(Id)\" as MinorId\nstate \"Major(Id)\" as MajorId\n\nstate c <<choice>>\n\nIdle --> ReqId\nReqId --> c\nc --> MinorId : [Id <= 10]\nc --> MajorId : [Id > 10]\n@enduml"
-}

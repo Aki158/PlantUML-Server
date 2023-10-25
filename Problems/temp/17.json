@@ -1,6 +1,0 @@
-{
-    "id": 17,
-    "title": "簡単なステート",
-    "theme": "状態図",
-    "uml": "@startuml\n\n[*] --> State1\nState1 --> [*]\nState1 : this is a string\nState1 : this is another string\n\nState1 -> State2\nState2 --> [*]\n\n@enduml"    
-}
