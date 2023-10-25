@@ -1,0 +1,6 @@
+{
+    "id": 20,
+    "title": "全ステレオタイプの例(choice,fork,join,end)",
+    "theme": "状態図",
+    "uml": "@startuml\nstate choice1 <<choice>>\nstate fork1   <<fork>>\nstate join2   <<join>>\nstate end3    <<end>>\n\n[*]     --> choice1 : from start\\nto choice\nchoice1 --> fork1   : from choice\\nto fork\nchoice1 --> join2   : from choice\\nto join\nchoice1 --> end3    : from choice\\nto end\n\nfork1   ---> State1 : from fork\\nto state\nfork1   --> State2  : from fork\\nto state\n\nState2  --> join2   : from state\\nto join\nState1  --> [*]     : from state\\nto end\n\njoin2   --> [*]     : from join\\nto end\n@enduml\n"        
+}

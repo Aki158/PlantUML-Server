@@ -1,0 +1,6 @@
+{
+    "id": 7,
+    "title": "パッケージ",
+    "theme": "ユースケース図",
+    "uml": "@startuml\nleft to right direction\nactor Guest as g\npackage Professional {\n  actor Chef as c\n  actor \"Food Critic\" as fc\n}\npackage Restaurant {\n  usecase \"Eat Food\" as UC1\n  usecase \"Pay for Food\" as UC2\n  usecase \"Drink\" as UC3\n  usecase \"Review\" as UC4\n}\nfc --> UC4\ng --> UC1\ng --> UC2\ng --> UC3\n@enduml"
+}
