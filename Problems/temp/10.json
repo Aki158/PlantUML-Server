@@ -1,0 +1,6 @@
+{
+    "id": 10,
+    "title": "クラス間の関係",
+    "theme": "クラス図",
+    "uml": "@startuml\nClass01 <|-- Class02\nClass03 *-- Class04\nClass05 o-- Class06\nClass07 .. Class08\nClass09 -- Class10\nClass11 <|.. Class12\nClass13 --> Class14\nClass15 ..> Class16\nClass17 ..|> Class18\nClass19 <--* Class20\nClass21 #-- Class22\nClass23 x-- Class24\nClass25 }-- Class26\nClass27 +-- Class28\nClass29 ^-- Class30\n@enduml"
+}

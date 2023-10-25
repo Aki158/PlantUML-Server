@@ -1,0 +1,6 @@
+{
+    "id": 12,
+    "title": "抽象クラスとインターフェース",
+    "theme": "クラス図",
+    "uml": "@startuml\n\nabstract class AbstractList\nabstract AbstractCollection\ninterface List\ninterface Collection\n\nList <|-- AbstractList\nCollection <|-- AbstractCollection\n\nCollection <|- List\nAbstractCollection <|- AbstractList\nAbstractList <|-- ArrayList\n\nclass ArrayList {\n    Object[] elementData\n    size()\n}\n\nenum TimeUnit {\n    DAYS\n    HOURS\n    MINUTES\n}\n\nannotation SuppressWarnings\n\nannotation Annotation {\n    annotation with members\n    String foo()\n    String bar()\n}\n\n@enduml"
+}
