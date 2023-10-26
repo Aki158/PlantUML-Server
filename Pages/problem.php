@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        
-        <title id="problem_title"></title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    <title id="problem_title"></title>
     <style>
+        .editor-box {
+            height: 600px;
+            border: 1px solid grey
+        }
+
         .display_area {
             height: 600px;
-            overflow-y: scroll;
             border: 1px solid grey;
+            overflow-y: scroll;
         }
 
         .text-red {
@@ -22,9 +27,9 @@
 <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
     <script>
-        const problem_data = JSON.parse(localStorage.getItem('problem_data'));
-        const answer_file_path = '../Temp/answer.svg';
-        const edit_file_path = '../Temp/edit.svg';
+        const problem_data = JSON.parse(localStorage.getItem("problem_data"));
+        const answer_file_path = "../Temp/answer.svg";
+        const edit_file_path = "../Temp/edit.svg";
 
         require.config({ paths: { "vs": "https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs" }});
         require(["vs/editor/editor.main"], function() {
@@ -48,10 +53,10 @@
                             file_type : "svg"
                         }
                     
-                    fetch('generateToFile.php', {
-                        method: 'POST',
+                    fetch("generateToFile.php", {
+                        method: "POST",
                         headers: {
-                            'Content-Type': 'application/json'
+                            "Content-Type": "application/json"
                         },
                         body: JSON.stringify(hashmap)
                     })
@@ -60,7 +65,7 @@
                         document.getElementById("edit_img").src = edit_file_path+"?time=" + new Date().getTime();
                     })
                     .catch(error => {
-                        console.error('Error:', error);
+                        console.error("Error:", error);
                 });
             };
 
@@ -95,41 +100,36 @@
         }
 
         function click_download_png(){
-            if(editor.getValue() === "' ここから記述してください\n"){
-                document.getElementById("download_warning").classList.add("text-red");
+            const hashmap = {
+                uml : editor.getValue(),
+                file_name : "edit",
+                file_type : "png"
             }
-            else{
-                const hashmap = {
-                    uml : editor.getValue(),
-                    file_name : "edit",
-                    file_type : "png"
+
+            fetch("generateToFile.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(hashmap)
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log(data);
+
+                if(data === "success"){
+                    var download_link = document.createElement("a");
+                    download_link.href = "../Temp/edit.png";
+                    download_link.download = "converted.png";
+                    download_link.click();
                 }
-
-                fetch('generateToFile.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(hashmap)
-                })
-                .then(response => response.text())
-                .then(data => {
-                    console.log(data);
-
-                    if(data === "success"){
-                        var download_link = document.createElement('a');
-                        download_link.href = '../Temp/edit.png';
-                        download_link.download = 'converted.png';
-                        download_link.click();
-                    }
-                    else{
-                        document.getElementById("download_warning").classList.add("text-red");
-                    }                    
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-            }
+                else{
+                    document.getElementById("download_warning").classList.add("text-red");
+                }                    
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
         }
 
         function click_download_svg(){
@@ -139,10 +139,10 @@
                 file_type : "svg"
             }
 
-            fetch('generateToFile.php', {
-                method: 'POST',
+            fetch("generateToFile.php", {
+                method: "POST",
                 headers: {
-                    'Content-Type': 'application/json'
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify(hashmap)
             })
@@ -151,9 +151,9 @@
                 console.log(data);
 
                 if(data === "success"){
-                    var download_link = document.createElement('a');
+                    var download_link = document.createElement("a");
                     download_link.href = edit_file_path;
-                    download_link.download = 'converted.png';
+                    download_link.download = "converted.png";
                     download_link.click();
                 }
                 else{
@@ -161,7 +161,7 @@
                 }
             })
             .catch(error => {
-                console.error('Error:', error);
+                console.error("Error:", error);
             });
         }
 
@@ -172,10 +172,10 @@
                 file_type : "txt"
             }
 
-            fetch('generateToFile.php', {
-                method: 'POST',
+            fetch("generateToFile.php", {
+                method: "POST",
                 headers: {
-                    'Content-Type': 'application/json'
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify(hashmap)
             })
@@ -184,9 +184,9 @@
                 console.log(data);
 
                 if(data === "success"){
-                    var download_link = document.createElement('a');
-                    download_link.href = '../Temp/edit.atxt';
-                    download_link.download = 'converted.atxt';
+                    var download_link = document.createElement("a");
+                    download_link.href = "../Temp/edit.atxt";
+                    download_link.download = "converted.atxt";
                     download_link.click();
                 }
                 else{
@@ -194,15 +194,15 @@
                 }
             })
             .catch(error => {
-                console.error('Error:', error);
+                console.error("Error:", error);
             });
         }
 
         function generate_answer_file(hashmap){
-            fetch('generateToFile.php', {
-                method: 'POST',
+            fetch("generateToFile.php", {
+                method: "POST",
                 headers: {
-                    'Content-Type': 'application/json'
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify(hashmap)
             })
@@ -211,7 +211,7 @@
                 set_answer_img_src(answer_file_path);
             })
             .catch(error => {
-                console.error('Error:', error);
+                console.error("Error:", error);
             });
         }
 
@@ -225,14 +225,14 @@
 
     <h1 id="problem_sub_title"></h1>
     <div class="d-flex">
-            <div id="editor" class="col px-0" style="height:600px;border:1px solid grey"></div>
+            <div id="editor" class="col px-0 editor-box"></div>
             <div id="urm_display_area" class="display_area col px-0">
                 <p class="my-0">■Download</p>
                 <p id="download_warning" class="my-0">※Preview が No image. の場合は、出力できません！</p>
                 <div>
-                    <button class="m-1" id="download_png_button" type="button" name="Preview" onclick="click_download_png();">png</button>
-                    <button class="m-1" id="download_svg_button" type="button" name="HTML" onclick="click_download_svg();">svg</button>
-                    <button class="m-1" id="download_txt__button" type="button" name="HTML" onclick="click_download_txt();">txt</button>
+                    <button id="download_png_button" class="m-1" type="button" name="Preview" onclick="click_download_png();">png</button>
+                    <button id="download_svg_button" class="m-1" type="button" name="HTML" onclick="click_download_svg();">svg</button>
+                    <button id="download_txt__button" class="m-1" type="button" name="HTML" onclick="click_download_txt();">txt</button>
                 </div>
                 <p class="my-0">■Preview</p>
                 <img id="edit_img" src="" alt="No image.">
