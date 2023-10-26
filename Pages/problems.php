@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-        <title>UML問題集</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>UML問題集</title>
         
     <style>
         .table {
@@ -55,8 +53,8 @@
 
         window.addEventListener("load", (event) => {
             request = new XMLHttpRequest();
-            request.open('GET', '../Problems/problems.json');
-            request.responseType = 'json';
+            request.open("GET", "../Problems/problems.json");
+            request.responseType = "json";
             request.send();
             request.onload = function() {
                 const problems_hashmap_arr = JSON.parse(JSON.stringify(request.response));
@@ -129,9 +127,9 @@
             
             set_display_state(index,row);
 
-            row.addEventListener('click', function() {
-                localStorage.setItem('problem_data', JSON.stringify(problems_hashmap_arr[index]));
-                window.location.href = 'problem.php'+'?id='+cell_th_id.innerHTML;
+            row.addEventListener("click", function() {
+                localStorage.setItem("problem_data", JSON.stringify(problems_hashmap_arr[index]));
+                window.location.href = "problem.php"+"?id="+cell_th_id.innerHTML;
             });
 
             row.append(cell_th_id);
@@ -143,10 +141,10 @@
         function set_display_state(index,table_row){
             // page_indexの値からtableへの表示/非表示を設定する
             if((clicked_page_index-1) * 5 <= index & index < clicked_page_index * 5){
-                table_row.style.display = '';
+                table_row.style.display = "";
             }
             else{
-                table_row.style.display = 'none';
+                table_row.style.display = "none";
             }
         }
     </script>
@@ -164,7 +162,7 @@
         </table>
         <div class="col d-flex justify-content-center">
             <nav>
-                <ul  id="page_button_group" class="pagination"></ul>
+                <ul id="page_button_group" class="pagination"></ul>
             </nav>
         </div>
     </div>
