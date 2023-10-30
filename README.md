@@ -29,20 +29,11 @@ UML問題集を通じてユーザーがPlantUMLについて理解し自ら図を
 - txt(ASCII)
 
 ## output
-### ウェブアプリケーションアクセス時
-[Todo] 画像をのせる
+### UML問題集
+![image](https://github.com/Aki158/PlantUML-Server/assets/119317071/2db6a936-0e58-4c26-9746-fce4ab846b11)
 
-### UML問題集の操作
-[Todo] 画像をのせる
-
-### UML問題へのアクセス時
-[Todo] 画像をのせる
-
-### エディタ編集時
-[Todo] 画像をのせる
-
-### Downloadボタンをクリックした時
-[Todo] 画像をのせる
+### UML問題
+![image](https://github.com/Aki158/PlantUML-Server/assets/119317071/07c4bb64-0b87-45f6-a052-91b227b2508d)
 
 ## 使用方法
-[Todo] 本番環境にリリースしたurlを貼付ける
+https://plantuml-server.aki158-website.blog
