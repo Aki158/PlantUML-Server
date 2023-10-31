@@ -1,0 +1,53 @@
+.table {
+    margin-bottom: 1rem;
+    border-collapse: collapse;
+}
+
+.rem0p9 {
+    font-size: 0.9rem;
+}
+
+.pt7 {
+    padding-top: 7rem;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.page-link {
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #007bff;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+}
+
+.page-clicked-link {
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #fff;
+    background-color: #007bff;
+    border: 1px solid #dee2e6;
+}
+
+.editor-box {
+    height: 600px;
+    border: 1px solid grey
+}
+
+.display_area {
+    height: 600px;
+    border: 1px solid grey;
+    overflow-y: scroll;
+}
+
+.text-red {
+    color: red;
+}
