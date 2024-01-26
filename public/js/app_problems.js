@@ -2,7 +2,7 @@ var clicked_page_index = 1;
 
 window.addEventListener("load", (event) => {
     request = new XMLHttpRequest();
-    request.open("GET", "../Problems/problems.json");
+    request.open("GET", "/Problems/problems.json");
     request.responseType = "json";
     request.send();
     request.onload = function() {

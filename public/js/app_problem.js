@@ -86,8 +86,6 @@ function click_download_png(){
     })
     .then(response => response.text())
     .then(data => {
-        console.log(data);
-
         if(data === "success"){
             var download_link = document.createElement("a");
             download_link.href = "../Temp/edit.png";
@@ -119,8 +117,6 @@ function click_download_svg(){
     })
     .then(response => response.text())
     .then(data => {
-        console.log(data);
-
         if(data === "success"){
             var download_link = document.createElement("a");
             download_link.href = edit_file_path;
@@ -152,8 +148,6 @@ function click_download_txt(){
     })
     .then(response => response.text())
     .then(data => {
-        console.log(data);
-
         if(data === "success"){
             var download_link = document.createElement("a");
             download_link.href = "../Temp/edit.atxt";
