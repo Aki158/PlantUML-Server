@@ -33,7 +33,12 @@ require(["vs/editor/editor.main"], function() {
             })
             .then(response => response.text())
             .then(data => {
-                document.getElementById("edit_img").src = edit_file_path+"?time=" + new Date().getTime();
+                if(data === "success"){
+                    document.getElementById("edit_img").src = edit_file_path+"?time=" + new Date().getTime();
+                }
+                else{
+                    document.getElementById("edit_img").src = "";
+                }
             })
             .catch(error => {
                 console.error("Error:", error);
@@ -120,7 +125,7 @@ function click_download_svg(){
         if(data === "success"){
             var download_link = document.createElement("a");
             download_link.href = edit_file_path;
-            download_link.download = "converted.png";
+            download_link.download = "converted.svg";
             download_link.click();
         }
         else{

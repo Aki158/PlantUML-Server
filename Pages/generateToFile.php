@@ -5,18 +5,21 @@
         $uml = $hashmap["uml"];
         $file_name = $hashmap["file_name"];
         $file_type = $hashmap["file_type"];
-        $puml_file_path = "../Temp/".$file_name.".puml";
-        $output_file_path = $file_type === "txt" ? "../Temp/".$file_name.".atxt" : "../Temp/".$file_name.".".$file_type;
+
+        $temp_path = "../Temp";
+        $excluded_files = [$temp_path."/answer.puml", $temp_path."/answer.svg"];
+        $puml_file_path = $temp_path."/".$file_name.".puml";
+        $output_file_path = $file_type === "txt" ? $temp_path."/".$file_name.".atxt" : $temp_path."/".$file_name.".".$file_type;
         $jar_file_path = "../Plantuml/plantuml.jar";
 
-        // 初回ロード時は、前回利用時のファイルが存在する可能性があるため
+        // 前回利用時のファイルが存在する可能性があるため
         // Tempフォルダのファイルをすべて削除する
-        if($file_name === "answer" & is_dir("../Temp")){
-            $files = glob("../Temp/*");
-            
+        // ただし、monaco-editorを編集中の場合は、answerFileは削除しない
+        if(is_dir($temp_path)){
+            $files = glob($temp_path."/*");
             foreach ($files as $file) {
-                if (is_file($file)) {
-                    unlink($file);
+                if(is_file($file) && !($file_name === "edit" && in_array($file, $excluded_files))){
+                    unlink($file);    
                 }
             }
         }
@@ -28,6 +31,7 @@
         $command = "java -jar ".$jar_file_path." -t".$file_type." ".$puml_file_path;
         exec($command);
 
+        // ファイルが無事保存されている場合は、successをapp_problem.jsに返す
         if(is_file($output_file_path)){
             print("success");
         }
@@ -35,4 +39,3 @@
             print($output_file_path);
         }
     }
-?>
